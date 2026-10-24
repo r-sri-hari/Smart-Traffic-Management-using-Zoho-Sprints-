@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Traffic Management System</title>
+  
+  <!-- Typography: Space Grotesk (Headings), Geist (Body), IBM Plex Mono (Numbers), Inter (Buttons) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Minimalist Modern Styles (Linear / Notion / Vercel style) -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/views.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'><circle cx='12' cy='12' r='10'/></svg>">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ======================================================================
+       1. HEADER
+       ====================================================================== -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="system-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="2" x2="12" y2="6"/>
+          <line x1="12" y1="18" x2="12" y2="22"/>
+          <line x1="2" y1="12" x2="6" y2="12"/>
+          <line x1="18" y1="12" x2="22" y2="12"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="header-title">Smart Traffic Management System</h1>
+        <p class="header-subtitle">Real-Time Computer Vision Detection &amp; Adaptive Signal Allocation</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="status-badge online" id="system-status-badge">
+        <span class="status-dot"></span>
+        <span id="system-status-text">YOLOv8 + ByteTrack Active</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       2. THREE LIVE VIDEOS (ROAD A, ROAD B, ROAD C)
+       ====================================================================== -->
+  <section class="page-section">
+    <div class="section-meta">
+      <h2 class="section-heading">Surveillance Feeds</h2>
+      <span class="section-tag">3 Independent Approaches</span>
+    </div>
+
+    <div class="surveillance-grid">
+
+      <!-- ROAD A (NORTH) -->
+      <div class="video-feed-card" id="card-road_a">
+        <div class="feed-toolbar">
+          <div class="feed-name-wrap">
+            <span class="feed-name">Road A (North)</span>
+            <span class="signal-pill green" id="pill-road_a">GREEN</span>
+          </div>
+          <div class="feed-actions">
+            <select class="feed-select" onchange="window.selectDatasetVideo('road_a', this.value)" title="Select dataset video">
+              <option value="v1.mp4" selected>v1.mp4</option>
+              <option value="v2.mp4">v2.mp4</option>
+              <option value="v3.mp4">v3.mp4</option>
+            </select>
+            <label class="feed-upload-btn" title="Upload custom traffic video">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Upload</span>
+              <input type="file" accept="video/mp4,video/avi" style="display:none;" onchange="window.handleVideoUpload('road_a', this.files[0])">
+            </label>
+          </div>
+        </div>
+
+        <div class="video-viewport">
+          <img id="video-road_a" src="/video_feed/road_a" class="feed-video-stream" alt="Road A Surveillance Feed">
+        </div>
+
+        <!-- Real-time Vehicle Counters for Road A -->
+        <div class="feed-counters-grid">
+          <div class="counter-box">
+            <span class="counter-label">Cars</span>
+            <span class="counter-value val-car" id="cnt-a-cars">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Motorcycles</span>
+            <span class="counter-value val-moto" id="cnt-a-bikes">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Bus</span>
+            <span class="counter-value val-bus" id="cnt-a-bus">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Truck</span>
+            <span class="counter-value val-truck" id="cnt-a-truck">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">FPS</span>
+            <span class="counter-value val-fps" id="cnt-a-fps">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROAD B (EAST) -->
+      <div class="video-feed-card" id="card-road_b">
+        <div class="feed-toolbar">
+          <div class="feed-name-wrap">
+            <span class="feed-name">Road B (East)</span>
+            <span class="signal-pill red" id="pill-road_b">RED</span>
+          </div>
+          <div class="feed-actions">
+            <select class="feed-select" onchange="window.selectDatasetVideo('road_b', this.value)" title="Select dataset video">
+              <option value="v1.mp4">v1.mp4</option>
+              <option value="v2.mp4" selected>v2.mp4</option>
+              <option value="v3.mp4">v3.mp4</option>
+            </select>
+            <label class="feed-upload-btn" title="Upload custom traffic video">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Upload</span>
+              <input type="file" accept="video/mp4,video/avi" style="display:none;" onchange="window.handleVideoUpload('road_b', this.files[0])">
+            </label>
+          </div>
+        </div>
+
+        <div class="video-viewport">
+          <img id="video-road_b" src="/video_feed/road_b" class="feed-video-stream" alt="Road B Surveillance Feed">
+        </div>
+
+        <!-- Real-time Vehicle Counters for Road B -->
+        <div class="feed-counters-grid">
+          <div class="counter-box">
+            <span class="counter-label">Cars</span>
+            <span class="counter-value val-car" id="cnt-b-cars">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Motorcycles</span>
+            <span class="counter-value val-moto" id="cnt-b-bikes">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Bus</span>
+            <span class="counter-value val-bus" id="cnt-b-bus">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Truck</span>
+            <span class="counter-value val-truck" id="cnt-b-truck">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">FPS</span>
+            <span class="counter-value val-fps" id="cnt-b-fps">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROAD C (SOUTH) -->
+      <div class="video-feed-card" id="card-road_c">
+        <div class="feed-toolbar">
+          <div class="feed-name-wrap">
+            <span class="feed-name">Road C (South)</span>
+            <span class="signal-pill red" id="pill-road_c">RED</span>
+          </div>
+          <div class="feed-actions">
+            <select class="feed-select" onchange="window.selectDatasetVideo('road_c', this.value)" title="Select dataset video">
+              <option value="v1.mp4">v1.mp4</option>
+              <option value="v2.mp4">v2.mp4</option>
+              <option value="v3.mp4" selected>v3.mp4</option>
+            </select>
+            <label class="feed-upload-btn" title="Upload custom traffic video">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Upload</span>
+              <input type="file" accept="video/mp4,video/avi" style="display:none;" onchange="window.handleVideoUpload('road_c', this.files[0])">
+            </label>
+          </div>
+        </div>
+
+        <div class="video-viewport">
+          <img id="video-road_c" src="/video_feed/road_c" class="feed-video-stream" alt="Road C Surveillance Feed">
+        </div>
+
+
+        <!-- Real-time Vehicle Counters for Road C -->
+        <div class="feed-counters-grid">
+          <div class="counter-box">
+            <span class="counter-label">Cars</span>
+            <span class="counter-value val-car" id="cnt-c-cars">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Motorcycles</span>
+            <span class="counter-value val-moto" id="cnt-c-bikes">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Bus</span>
+            <span class="counter-value val-bus" id="cnt-c-bus">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">Truck</span>
+            <span class="counter-value val-truck" id="cnt-c-truck">0</span>
+          </div>
+          <div class="counter-box">
+            <span class="counter-label">FPS</span>
+            <span class="counter-value val-fps" id="cnt-c-fps">0</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       3. VEHICLE STATISTICS (ESSENTIAL 9 METRICS)
+       ====================================================================== -->
+  <section class="page-section">
+    <div class="section-meta">
+      <h2 class="section-heading">Vehicle Statistics</h2>
+      <span class="section-tag">Intersection Aggregation</span>
+    </div>
+
+    <div class="stats-grid">
+      <!-- 1. Cars -->
+      <div class="stat-card">
+        <span class="stat-title">Cars</span>
+        <span class="stat-number val-car" id="kpi-cars">0</span>
+      </div>
+
+      <!-- 2. Motorcycles -->
+      <div class="stat-card">
+        <span class="stat-title">Motorcycles</span>
+        <span class="stat-number val-moto" id="kpi-bikes">0</span>
+      </div>
+
+      <!-- 3. Bus -->
+      <div class="stat-card">
+        <span class="stat-title">Bus</span>
+        <span class="stat-number val-bus" id="kpi-bus">0</span>
+      </div>
+
+      <!-- 4. Truck -->
+      <div class="stat-card">
+        <span class="stat-title">Truck</span>
+        <span class="stat-number val-truck" id="kpi-truck">0</span>
+      </div>
+
+      <!-- 5. Traffic Density -->
+      <div class="stat-card">
+        <span class="stat-title">Traffic Density</span>
+        <span class="stat-number val-density" id="kpi-density">0.0</span>
+      </div>
+
+      <!-- 6. Queue Length -->
+      <div class="stat-card">
+        <span class="stat-title">Queue Length</span>
+        <span class="stat-number val-queue" id="kpi-queue">0.0m</span>
+      </div>
+
+      <!-- 7. Current Green Road -->
+      <div class="stat-card">
+        <span class="stat-title">Current Green Road</span>
+        <span class="stat-number text-green" style="font-size: 0.95rem;" id="kpi-green-road">Road A (North)</span>
+      </div>
+
+      <!-- 8. Green Timer -->
+      <div class="stat-card">
+        <span class="stat-title">Green Timer</span>
+        <span class="stat-number text-green" id="kpi-green-timer">25s</span>
+      </div>
+
+      <!-- 9. Average Waiting Time -->
+      <div class="stat-card">
+        <span class="stat-title">Average Waiting Time</span>
+        <span class="stat-number" id="kpi-wait-time">0s</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       4. TRAFFIC SIGNAL (NORTH, EAST, SOUTH, WEST)
+       ====================================================================== -->
+  <section class="page-section">
+    <div class="section-meta">
+      <h2 class="section-heading">Traffic Signal</h2>
+      <span class="section-tag">Dynamic 4-Way State</span>
+    </div>
+
+    <div class="signals-grid">
+
+      <!-- NORTH (ROAD A) -->
+      <div class="signal-card" id="sig-card-north">
+        <div class="signal-housing">
+          <div class="lamp red" id="bulb-north-red"></div>
+          <div class="lamp yellow" id="bulb-north-yellow"></div>
+          <div class="lamp green on" id="bulb-north-green"></div>
+        </div>
+        <div class="signal-details">
+          <span class="sig-dir">North</span>
+          <span class="sig-road">Road A Approach</span>
+          <span class="sig-status text-green" id="status-north">PASS (GREEN)</span>
+          <span class="sig-timer" id="timer-north">Active: 25s</span>
+        </div>
+      </div>
+
+      <!-- EAST (ROAD B) -->
+      <div class="signal-card" id="sig-card-east">
+        <div class="signal-housing">
+          <div class="lamp red on" id="bulb-east-red"></div>
+          <div class="lamp yellow" id="bulb-east-yellow"></div>
+          <div class="lamp green" id="bulb-east-green"></div>
+        </div>
+        <div class="signal-details">
+          <span class="sig-dir">East</span>
+          <span class="sig-road">Road B Approach</span>
+          <span class="sig-status text-red" id="status-east">STOP (RED)</span>
+          <span class="sig-timer" id="timer-east">Waiting: 0s</span>
+        </div>
+      </div>
+
+      <!-- SOUTH (ROAD C) -->
+      <div class="signal-card" id="sig-card-south">
+        <div class="signal-housing">
+          <div class="lamp red on" id="bulb-south-red"></div>
+          <div class="lamp yellow" id="bulb-south-yellow"></div>
+          <div class="lamp green" id="bulb-south-green"></div>
+        </div>
+        <div class="signal-details">
+          <span class="sig-dir">South</span>
+          <span class="sig-road">Road C Approach</span>
+          <span class="sig-status text-red" id="status-south">STOP (RED)</span>
+          <span class="sig-timer" id="timer-south">Waiting: 0s</span>
+        </div>
+      </div>
+
+      <!-- WEST (CROSS-CORRIDOR) -->
+      <div class="signal-card" id="sig-card-west">
+        <div class="signal-housing">
+          <div class="lamp red on" id="bulb-west-red"></div>
+          <div class="lamp yellow" id="bulb-west-yellow"></div>
+          <div class="lamp green" id="bulb-west-green"></div>
+        </div>
+        <div class="signal-details">
+          <span class="sig-dir">West</span>
+          <span class="sig-road">Cross-Corridor</span>
+          <span class="sig-status text-red" id="status-west">STOP (RED)</span>
+          <span class="sig-timer" id="timer-west">Standby</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       5. TRAFFIC DENSITY GRAPH
+       ====================================================================== -->
+  <section class="page-section">
+    <div class="section-meta">
+      <h2 class="section-heading">Traffic Density Graph</h2>
+      <span class="section-tag">Weighted Index per Approach</span>
+    </div>
+
+    <div class="graph-card">
+      <div class="graph-header">
+        <div class="graph-legend">
+          <span class="legend-dot dot-a"></span><span>Road A</span>
+          <span class="legend-dot dot-b"></span><span>Road B</span>
+          <span class="legend-dot dot-c"></span><span>Road C</span>
+        </div>
+        <span class="graph-subtitle">Updates continuously every second</span>
+      </div>
+      <div class="graph-canvas-container">
+        <canvas id="traffic-density-chart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       6. QUEUE GROWTH GRAPH
+       ====================================================================== -->
+  <section class="page-section">
+    <div class="section-meta">
+      <h2 class="section-heading">Queue Growth Graph</h2>
+      <span class="section-tag">Total Queue Length (Meters)</span>
+    </div>
+
+    <div class="graph-card">
+      <div class="graph-header">
+        <div class="graph-legend">
+          <span class="legend-dot dot-queue"></span><span>Total Intersection Queue (m)</span>
+        </div>
+        <span class="graph-subtitle">6.8m per queued vehicle</span>
+      </div>
+      <div class="graph-canvas-container">
+        <canvas id="queue-growth-chart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       7. DOWNLOAD REPORTS
+       ====================================================================== -->
+  <section class="page-section">
+    <div class="section-meta">
+      <h2 class="section-heading">Download Reports</h2>
+      <span class="section-tag">Export Project Telemetry</span>
+    </div>
+
+    <div class="reports-card">
+      <div class="reports-info">
+        <p class="reports-desc">Export verified vehicle counts, density scores, and adaptive signal timing logs recorded during this session.</p>
+      </div>
+      <div class="reports-actions">
+        <button class="btn-action" onclick="window.TrafficApp.reportEngine.generateCSV()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download CSV</span>
+        </button>
+        <button class="btn-action primary" onclick="window.TrafficApp.reportEngine.openPDFPreview()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Download PDF</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- PDF Audit Modal -->
+<div class="report-modal" id="report-pdf-modal">
+  <div class="report-modal-content">
+    <div class="report-modal-header">
+      <h3 style="font-family: var(--font-heading); margin: 0; font-size: 1.1rem; color: #0F172A;">Smart Traffic Management System — Session Audit</h3>
+      <button onclick="window.TrafficApp.reportEngine.closePDFPreview()" class="btn-action" style="padding: 4px 10px; font-size: 0.8rem;">✕ Close</button>
+    </div>
+    <div id="pdf-report-body"></div>
+    <div class="report-modal-actions">
+      <button onclick="window.TrafficApp.reportEngine.closePDFPreview()" class="btn-action">Cancel</button>
+      <button onclick="window.TrafficApp.reportEngine.printPDF()" class="btn-action primary">Print / Save PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- Core Scripts -->
+<script src="js/state.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

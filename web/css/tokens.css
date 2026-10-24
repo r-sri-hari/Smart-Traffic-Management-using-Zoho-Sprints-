@@ -1,0 +1,44 @@
+/* ==========================================================================
+   DESIGN TOKENS - MINIMALIST MODERN TRAFFIC SYSTEM (Linear / Vercel style)
+   ========================================================================== */
+
+:root {
+  /* Clean Dark Theme Palette */
+  --bg-page: #0B0F17;
+  --bg-card: #111827;
+  --bg-card-subtle: #172133;
+  --bg-input: #1C2638;
+  --border-subtle: #1F2937;
+  --border-hover: #374151;
+  --border-focus: #4B5563;
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Geist', -apple-system, sans-serif;
+  --font-numbers: 'IBM Plex Mono', monospace;
+  --font-button: 'Inter', -apple-system, sans-serif;
+
+  /* Text Colors */
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+
+  /* Traffic & Vehicle Semantic Colors */
+  --color-car: #10B981;        /* Emerald / Green */
+  --color-moto: #06B6D4;       /* Cyan */
+  --color-bus: #F59E0B;        /* Amber / Orange */
+  --color-truck: #EF4444;      /* Red */
+  
+  --signal-green: #10B981;
+  --signal-yellow: #F59E0B;
+  --signal-red: #EF4444;
+
+  /* Modern Spacing */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Subtle Modern Shadows (No sci-fi glow) */
+  --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.25), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+}

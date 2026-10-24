@@ -1,0 +1,132 @@
+/* ==========================================================================
+   MICRO-INTERACTIONS & FUTURISTIC ANIMATIONS
+   ========================================================================== */
+
+/* Radar sweep rotation */
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep {
+  animation: radarSweep 4s linear infinite;
+}
+
+/* Sci-fi scanner line animation */
+@keyframes scanline {
+  0% {
+    top: 0%;
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0.8;
+  }
+}
+
+.scanline-effect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38BDF8, #22C55E, transparent);
+  box-shadow: 0 0 10px #38BDF8, 0 0 20px #22C55E;
+  pointer-events: none;
+  animation: scanline 2.5s ease-in-out infinite alternate;
+}
+
+/* Hologram pulse */
+@keyframes holoPulse {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.4));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.8));
+  }
+}
+
+.holo-pulse {
+  animation: holoPulse 2s ease-in-out infinite;
+}
+
+/* Emergency Flasher */
+@keyframes emergencyFlash {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.8), inset 0 0 20px rgba(239, 68, 68, 0.5);
+    border-color: #EF4444;
+  }
+  50% {
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.2), inset 0 0 5px rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+}
+
+.emergency-alert-flash {
+  animation: emergencyFlash 1s infinite;
+}
+
+/* Skeleton Loading Shimmer */
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 41, 59, 0.5) 25%,
+    rgba(51, 65, 85, 0.5) 37%,
+    rgba(30, 41, 59, 0.5) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeletonShimmer 1.8s ease infinite;
+}
+
+/* ============================================================
+   HUD / Military CV Bounding Box Corner Animations
+   ============================================================ */
+@keyframes hudCornerPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes hudScanSweep {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+  100% { opacity: 0.4; }
+}
+
+/* Traffic light glow pulse */
+@keyframes signalGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px currentColor) drop-shadow(0 0 40px currentColor);
+  }
+}
+
+/* Countdown ring pulse */
+@keyframes countdownPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* KPI value update flash */
+@keyframes kpiFlash {
+  0% { background: rgba(56, 189, 248, 0.15); }
+  100% { background: transparent; }
+}

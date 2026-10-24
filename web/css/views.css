@@ -1,0 +1,602 @@
+/* ==========================================================================
+   VIEWS STYLING - CLEAN, FUNCTIONAL ACADEMIC SMART TRAFFIC DASHBOARD
+   (Inspired by Apple, Notion, GitHub, Linear, Vercel)
+   ========================================================================== */
+
+.app-layout {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ==========================================================================
+   1. APP HEADER
+   ========================================================================== */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-subtle);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.system-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--color-car);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.header-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.header-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  background-color: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-numbers);
+  font-size: 0.78rem;
+  color: var(--color-car);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-car);
+  border-radius: 50%;
+}
+
+/* Section Metadata */
+.page-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2px;
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.section-tag {
+  font-family: var(--font-numbers);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   2. THREE SURVEILLANCE VIDEOS
+   ========================================================================== */
+.surveillance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .surveillance-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.video-feed-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background-color: var(--bg-card-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.feed-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feed-name {
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.signal-pill {
+  font-family: var(--font-numbers);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.signal-pill.green {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--signal-green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.signal-pill.yellow {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: var(--signal-yellow);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.signal-pill.red {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--signal-red);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.feed-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feed-select {
+  font-family: var(--font-numbers);
+  font-size: 0.74rem;
+  padding: 3px 6px;
+  cursor: pointer;
+}
+
+.feed-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-family: var(--font-button);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.feed-upload-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+/* Video & Canvas Overlay Viewport */
+.video-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #050811;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feed-video-stream {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Feed Counters Strip */
+.feed-counters-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-subtle);
+  padding: 8px 6px;
+}
+
+.counter-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 2px;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.counter-box:last-child {
+  border-right: none;
+}
+
+.counter-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.counter-value {
+  font-family: var(--font-numbers);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.val-car { color: var(--color-car); }
+.val-moto { color: var(--color-moto); }
+.val-bus { color: var(--color-bus); }
+.val-truck { color: var(--color-truck); }
+.val-fps { color: #E2E8F0; }
+
+/* ==========================================================================
+   3. VEHICLE STATISTICS (9 ESSENTIAL METRICS)
+   ========================================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: var(--shadow-subtle);
+}
+
+.stat-title {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-number {
+  font-family: var(--font-numbers);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.val-density { color: var(--color-moto); }
+.val-queue { color: var(--color-bus); }
+.text-green { color: var(--color-car); }
+.text-red { color: var(--color-truck); }
+
+/* ==========================================================================
+   4. TRAFFIC SIGNAL (4 DIRECTIONS)
+   ========================================================================== */
+.signals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .signals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.signal-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.signal-housing {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 8px 6px;
+  background-color: #070B12;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+}
+
+.lamp {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  opacity: 0.2;
+  transition: all 0.2s ease;
+}
+
+.lamp.red { background-color: var(--signal-red); }
+.lamp.yellow { background-color: var(--signal-yellow); }
+.lamp.green { background-color: var(--signal-green); }
+
+.lamp.red.on {
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.7);
+}
+
+.lamp.yellow.on {
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.7);
+}
+
+.lamp.green.on {
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+}
+
+.signal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sig-dir {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sig-road {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.sig-status {
+  font-family: var(--font-numbers);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.sig-timer {
+  font-family: var(--font-numbers);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   5 & 6. GRAPHS (DENSITY & QUEUE)
+   ========================================================================== */
+.graph-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.graph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.graph-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-numbers);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.dot-a { background-color: var(--color-car); }
+.dot-b { background-color: var(--color-moto); }
+.dot-c { background-color: var(--color-bus); }
+.dot-queue { background-color: var(--color-bus); }
+
+.graph-subtitle {
+  font-family: var(--font-numbers);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.graph-canvas-container {
+  width: 100%;
+  height: 240px;
+  position: relative;
+}
+
+.graph-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ==========================================================================
+   7. DOWNLOAD REPORTS
+   ========================================================================== */
+.reports-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (max-width: 700px) {
+  .reports-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.reports-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.reports-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  font-family: var(--font-button);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.btn-action:hover {
+  background-color: var(--border-subtle);
+  border-color: var(--border-hover);
+}
+
+.btn-action.primary {
+  background-color: var(--color-car);
+  color: #052E16;
+  border-color: var(--color-car);
+  font-weight: 600;
+}
+
+.btn-action.primary:hover {
+  background-color: #059669;
+  border-color: #059669;
+}
+
+/* ==========================================================================
+   PDF REPORT MODAL
+   ========================================================================== */
+.report-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-modal.open {
+  display: flex;
+}
+
+.report-modal-content {
+  background: #FFFFFF;
+  color: #0F172A;
+  border-radius: var(--radius-md);
+  width: 90%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.report-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.report-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #E2E8F0;
+}
